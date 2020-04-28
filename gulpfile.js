@@ -7,7 +7,7 @@ const sass = require('gulp-sass');
 
 
 
-const dist = 'D:/ospanel/domains/VueAdmin/vue-admin/';
+const dist = 'D:/ospanel/domains/VueAdmin/admin/';
 
 gulp.task("copy-html", () => {
   return gulp.src('./app/src/index.html')
