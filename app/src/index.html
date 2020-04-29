@@ -4,11 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>Hi2211</title>
+  <script src="https://unpkg.com/vue"></script>
+  <title>VueAdmin</title>
 </head>
 <body>
-  <input type="text">
-  <button>Создать страницу</button>
+
+  <div id="app"> 
+
+    <input type="text" v-model="newPageName">
+    <button v-on:click="createPage">Создать страницу</button>
+    <div v-for="(page, index) in pageList">
+      <h1> {{ page }} - {{ index + 1 }} - <a href="#" v-on:click="deletePage(page)">(X)</a></h1>
+    </div>
+
+
+  </div>  
+
   <script src="bandl.js"></script>
 </body>
 </html>
