@@ -1,33 +1,33 @@
 "use strict";
-// const Vue = require("vue");
-const axios = require("axios");
+const Editor = require("./editor");
+// const Vue = require("vue"); // подключен в html
+const UIkit = require("uikit");
+
+window.editor = new Editor();
 new Vue({
   el: "#app",
   data: {
-    "pageList": [],
-    "newPageName": "",
+    showLoader: false,
   },
   methods: {
-    createPage() {
-    axios
-      .post("./api/createNewHtmlPage.php", { "name": this.newPageName })
-      .then(() => this.updatePageList());
-    },
-    updatePageList() {
-          axios
-      .get("./api/")
-      .then((response) => {
-        this.pageList = response.data;
-      });
-    },
-    deletePage(page) {
-      axios 
-      .post("./api/deletePage.php", { "name": page })
-      .then(() => this.updatePageList());
+    onBtnSave() {
+      this.showLoader = true;
+      window.editor.save(
+        () => {
+          this.showLoader = false;
+          UIkit.notification({message: 'Успешно сохранено!', status: 'success'});
+        },
+        () => {
+          this.showLoader = false;
+          UIkit.notification({message: 'Ошибка сохранеия!', status: 'danger'});
+        }
+      );
     }
   },
   created() {
-    this.updatePageList();
+    window.editor.open("index.html", () => {
+      this.showLoader = false;
+    });
+
   }
 });
-  
