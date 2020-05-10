@@ -21,7 +21,8 @@ module.exports = class Editor {
       })
       .then(DOMHelper.serializeDomToStr)
       .then((html) => axios.post('./api/saveTempPage.php', { html }))
-      .then(() => this.iframe.load("../temp.html"))
+      .then(() => this.iframe.load("../temp_dgerg35434gf34g3.html"))
+      .then((html) => axios.post('./api/deleteTempPage.php'))
       .then(() => this.enableEditing())
       .then(() => this.injectStyles())
       .then(cb);
